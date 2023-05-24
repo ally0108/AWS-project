@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>維修紀錄</title>
+    <!-- Navigation -->
+    <nav>
+      <ul>
+        <li><a href="mainpage.html">Home</a></li>
+        <li><a href="info.html">Info</a></li>
+        <li><a href="login.html">Log out</a></li>
+      </ul>
+    </nav>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="background">
+      <h2>REPAIR RECORDS</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Serial num</th>
+            <th>Machine</th>
+            <th>Employee</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>2023/05/20</td>
+            <td>001</td>
+            <td>100</td>
+            <td>
+              Joe
+              <tr>
+                <td>2023/05/21</td>
+                <td>002</td>
+                <td>101</td>
+                <td>
+                  Zoe
+
+                  <!-- {% for k in data.items() %} -->
+                  <tr>
+                    <td>{{k.datetime}}</td>
+                    <td>{{k}}</td>
+                    <td>{{k.machine_id}}</td>
+                    <td>{{k.mid}}</td>
+                  </tr>
+                  {% endfor %}
+                </td>
+              </tr>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

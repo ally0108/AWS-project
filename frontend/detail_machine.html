@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+    <title>Machine Detail</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style-detail.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+  </head>
+  <body>
+    <!-- header section start -->
+    <div class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="logo">Wonderful Machine</div>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="mainpage.html">HOME</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="info.html">INFO</a>
+              </li>
+              <!-- {% if username %} -->
+              <li class="nav-item">
+                <a class="nav-link" href="login.html" onclick="logout()"
+                  >LOGOUT</a
+                >
+              </li>
+              <!-- {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="login.html">SIGNUP</a>
+              </li>
+              {% endif %} -->
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+              <!-- {% if username %} -->
+              <button
+                class="btn btn-outline-success my-2 my-sm-0"
+                type="submit"
+              >
+                HI, <span id="username"></span> !
+              </button>
+              <!-- {% else %}
+              <button
+                class="btn btn-outline-success my-2 my-sm-0"
+                type="submit"
+              >
+                LOGIN
+              </button>
+              {% endif %} -->
+            </form>
+          </div>
+        </nav>
+      </div>
+
+      <div class="banner_section layout_padding">
+        <div class="mach-box banner_section layout_padding">
+          <!-- {% for k in data.items() %} -->
+          <div class="user-box">
+            <p>Machine ID: {{k.machine_id}}</p>
+          </div>
+          <div class="user-box">
+            <p>Machine Type: {{k.type}}</p>
+          </div>
+          <div class="user-box">
+            <p>Status: {{k.status}}</p>
+          </div>
+          <div class="user-box">
+            <p>
+              Last Repair Time: {{k.repair_time}} <br />
+              <!-- (希望呈現的樣式: 2023/05/08 10:51) -->
+            </p>
+          </div>
+          <!-- {% endfor %} -->
+          <center>
+            <div class="btnContainer">
+              <a href="edit_machine.html" class="button editButton"> EDIT </a>
+              <!-- 杜: 按下 delete 後刪除該 machine -->
+              <a href="machine.html" class="button deleteButton"> DELETE </a>
+            </div>
+          </center>
+        </div>
+      </div>
+    </div>
+    <script>
+      // for navbar username
+      var username = sessionStorage.getItem("username");
+      var usernameElement = document.getElementById("username");
+      usernameElement.textContent = username;
+
+      function logout() {
+        sessionStorage.clear();
+      }
+    </script>
+  </body>
+</html>

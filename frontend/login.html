@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>機台管理系統</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+
+  <body>
+    <div class="background">
+      <div class="shape"></div>
+      <div class="shape"></div>
+    </div>
+    <form action="/login" method="post" onsubmit="saveUsername()">
+      <ul>
+        <h3>Login Here</h3>
+
+        <label>Username</label>
+        <input type="text" placeholder="Username" name="account" required />
+
+        <label>Password</label>
+        <input
+          type="password"
+          placeholder="Password"
+          name="password"
+          required
+        />
+        <input type="submit" class="btn" value="login" id="submitbtn" />
+        <!-- onclick="location.href='./signup'" -->
+      </ul>
+    </form>
+    <script>
+      function saveUsername() {
+        var username = document.querySelector('input[name="account"]').value;
+        sessionStorage.setItem("username", username);
+      }
+    </script>
+  </body>
+</html>
