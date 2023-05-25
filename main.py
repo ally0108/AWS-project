@@ -20,14 +20,15 @@ cur=conn.cursor()
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.urandom(24) # 加密用金鑰
+app.config['SECRET_KEY'] = b'\xcc\x1e4\xc5\x8e\x80\xb5\xd9\xedd\xbe-\xd7\xf9\x8e\xd0\xccSG\xfe;\xa3Bh' # 加密用金鑰
+# app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=31)
 
-@app.route("/index", methods = ['GET', 'POST'])
-def index():
+@app.route("/login", methods = ['GET', 'POST'])
+def login():
     return render_template('login.html')
 
-@app.route("/login", methods = ['POST'])
-def login():
+@app.route("/login_u", methods = ['POST'])
+def login_u():
     account = request.values.get('account')
     password = request.values.get('password')
 
@@ -46,25 +47,84 @@ def login():
         else :
             flash('帳密輸入錯誤')
             print('')
-            return redirect(url_for('index'))
+            return redirect(url_for('login'))
     else:
         flash('login error!')
-        return redirect(url_for('index'))
+        return redirect(url_for('login'))
 
 @app.route("/add", methods = ['GET', 'POST'])
 def add():
     return render_template('add_machine.html')
 
-@app.route("/detail", methods = ['GET', 'POST'])
-def detail():
-    return render_template('detail_machine.html')
+@app.route("/detail/<machine_id>", methods = ['GET', 'POST'])
+def detail(machine_id):
+    sql = "SELECT * FROM `machine` where machine_id = %s"
+    
+    cur.execute(sql,(machine_id))
+    conn.commit()
+    result = cur.fetchone()
+    data = {}
 
-@app.route("/edit", methods = ['GET', 'POST'])
-def edit():
-    return render_template('edit_machine.html')
+    data['machine_id'] = result[0]
+    data['type'] = result[1]
+    data['status'] = result[2]
+    data['repair_time'] = result[3]
+
+    return render_template('detail_machine.html', data=data, username=session.get('name'))
+
+@app.route("/edit/<machine_id>", methods = ['GET', 'POST'])
+def edit(machine_id):
+    sql = "SELECT * FROM `machine` where machine_id = %s"
+    
+    cur.execute(sql,(machine_id))
+    conn.commit()
+    result = cur.fetchone()
+    data = {}
+
+    data['machine_id'] = result[0]
+    data['type'] = result[1]
+    data['status'] = result[2]
+    data['repair_time'] = result[3]
+
+    return render_template('edit_machine.html', data=data)
 
 @app.route("/info", methods = ['GET', 'POST'])
 def info():
+    """
+    mid(員工編號)
+    password
+    machine_id
+    name
+    email
+    """
+    mid = session.get('mid')
+    sql = """SELECT `password`, `name`, `email` FROM `member` where `mid` = %s"""
+    
+    cur.execute(sql,(mid))
+    conn.commit()
+    result = cur.fetchone()
+
+    
+    data = {}
+
+    data['password'] = result[0]
+    data['name'] = result[1]
+    data['email'] = result[2]
+
+    return render_template('info.html', data=data)
+
+@app.route("/update_info", methods = ['GET', 'POST'])
+def update_info():
+    name = request.values.get('name')
+    password = request.values.get('password')
+    email = request.values.get('email')
+    mid = session.get('mid')
+
+    sql = "UPDATE `member` SET `name` = %s, `password` = %s, `email` = %s WHERE `mid` = %s"
+    
+    cur.execute(sql,(name, password, email, mid))
+    conn.commit()
+
     return render_template('info.html')
 
 @app.route("/machine", methods = ['GET', 'POST'])
@@ -92,7 +152,7 @@ def machine():
 
         data.append(temp)
 
-    return render_template('machine.html', data=data, name=session['name'])
+    return render_template('machine.html', data=data, username=session.get('name'))
 
 @app.route("/main", methods = ['GET', 'POST'])
 def main():
@@ -106,7 +166,7 @@ def repair():
     machine_id
     datetime
     """
-    sql = "SELECT * FROM `repair` "
+    sql = "SELECT repair.*, member.name FROM `repair` JOIN `member` where repair.mid = member.mid"
     
     cur.execute(sql)
     conn.commit()
@@ -116,16 +176,47 @@ def repair():
     for r in result:
         temp = {}
         temp['rid'] = r[0]
-        temp['mid'] = r[1]
+        # temp['mid'] = r[1]
         temp['machine_id'] = r[2]
         temp['datetime'] = r[3]
+        temp['name'] = r[4]
 
         data.append(temp)
 
     return render_template('repairpage.html', data=data)
 
-    # return render_template('repairpage.html')
+@app.route("/update_machine/<machine_id>", methods = ['GET', 'POST'])
+def update_machine(machine_id):
+    """
+    rid
+    mid(員工編號)
+    machine_id
+    datetime
+    """
+    sql = "UPDATE `machine` SET `status` = 'good' where machine_id = (%s)"
+    cur.execute(sql,(machine_id))
+    conn.commit()
 
+    return redirect(url_for('machine'))
+
+@app.route("/add_machine", methods = ['GET', 'POST'])
+def add_machine():
+    """
+    machine_id（機台編號）
+    type (type A/ type B/ type C)
+    status（良好/待維修）
+    repair_time (是上次維修的時間)
+    """
+    machine_id = request.values.get('machine_id')
+    type = request.values.get('machine_type')
+    status = request.values.get('machine_status')
+
+    sql = "INSERT INTO `machine` (`machine_id`, `type`, `status`) VALUES (%s, %s, %s)"
+    cur.execute(sql,(machine_id, type, status))
+    conn.commit()
+    # result = cur.fetchone()
+
+    return redirect(url_for('machine'))
 
 
 if __name__ == '__main__':

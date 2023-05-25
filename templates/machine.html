@@ -38,25 +38,19 @@
               <li class="nav-item">
                 <a class="nav-link" href="/info">INFO</a>
               </li>
-              <!-- {% if name %} -->
+              {% if username %}
               <li class="nav-item">
-                <a class="nav-link" href="/login" onclick="logout()"
-                  >LOGOUT</a
-                >
+                <a class="nav-link" href="/login" onclick="logout()">LOGOUT</a>
               </li>
-              <!-- {% else %}
-              <li class="nav-item">
-                <a class="nav-link" href="login.html">SIGNUP</a>
-              </li>
-              {% endif %} -->
+              {% endif %} 
             </ul>
             <form class="form-inline my-2 my-lg-0">
-              <!-- {% if name %} -->
+              <!-- {% if username %} -->
               <button
                 class="btn btn-outline-success my-2 my-sm-0"
                 type="submit"
               >
-                HI, <span id="username"></span> !
+                HI, <span id="username">{{username}}</span> !
               </button>
               <!-- {% else %}
               <button
@@ -99,13 +93,14 @@
                   <div class="go-arrow">○</div>
                 </div>
                 {% else %}
-                <button class="com-btn repairBtn">Repair Complete</button>
+                <button class="com-btn repairBtn" data-machineid="{{k.machine_id}}">Repair Complete</button>
                 <div class="go-corner2" href="#">
                   <div class="go-arrow">×</div>
                 </div>
                 {% endif %}
               </div>
               {% endfor %}
+              {{data}}
               <!-- 杜: 俞萱只要改這裡就可以了 End ! -->
             </div>
           </div>
@@ -145,25 +140,25 @@
         // 存 machineId ，之後在 detail_machine.html 會用到
         sessionStorage.setItem("selectedMachineId", machineId);
 
-        location.href = "/detail";
+        location.href = "/detail/" + machineId;
       }
 
       // 修改 machine status
       var repairButtons = document.getElementsByClassName("repairBtn");
       for (var i = 0; i < repairButtons.length; i++) {
+        let machine_id = repairButtons[i].dataset['machineid']
         repairButtons[i].addEventListener("click", function (event) {
           event.stopPropagation();
 
           // 杜: 更新資料庫中相對應 machine_id 的 machine_status 為 good(良好)
-
-          location.href = "/machine";
+          location.href = "/update_machine/" + machine_id;
         });
       }
 
       // for navbar username
       var username = sessionStorage.getItem("username");
       var usernameElement = document.getElementById("username");
-      usernameElement.textContent = username;
+      // usernameElement.textContent = username;
 
       function logout() {
         sessionStorage.clear();

@@ -74,28 +74,26 @@
 
       <div class="banner_section layout_padding">
         <div class="mach-box banner_section layout_padding">
-          <!-- {% for k in data.items() %} -->
           <div class="user-box">
-            <p>Machine ID: {{k.machine_id}}</p>
+            <p>Machine ID: {{data.machine_id}}</p>
           </div>
           <div class="user-box">
-            <p>Machine Type: {{k.type}}</p>
+            <p>Machine Type: {{data.type}}</p>
           </div>
           <div class="user-box">
-            <p>Status: {{k.status}}</p>
+            <p>Status: {{data.status}}</p>
           </div>
           <div class="user-box">
             <p>
-              Last Repair Time: {{k.repair_time}} <br />
+              Last Repair Time: {{data.repair_time}} <br />
               <!-- (希望呈現的樣式: 2023/05/08 10:51) -->
             </p>
           </div>
-          <!-- {% endfor %} -->
           <center>
             <div class="btnContainer">
-              <a href="/edit" class="button editButton"> EDIT </a>
+              <a href="/edit/{{data.machine_id}}" class="button editButton"> EDIT </a>
               <!-- 杜: 按下 delete 後刪除該 machine -->
-              <a href="/machin" class="button deleteButton"> DELETE </a>
+              <a href="/delete_machine" class="button deleteButton"> DELETE </a>
             </div>
           </center>
         </div>

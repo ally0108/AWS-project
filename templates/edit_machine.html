@@ -77,13 +77,13 @@
         <div class="mach-box banner_section layout_padding">
           <form action="" method="">
             <div class="user-box" name="machine_id">
-              <!-- <p>Machine ID: {{k.machine_id}}</p> -->
+              <!-- <p>Machine ID: </p> -->
               <!-- machineIdElement 存在 sessionStorage 了-->
-              <p id="machineIdElement"></p>
+              <p id="machineIdElement">{{data.machine_id}}</p>
             </div>
             <div class="user-box">
-              <input type="type" name="machine_type" required />
               <label for="types">Machine Type</label>
+              <input type="type" name="machine_type" required value="{{data.type}}" />
             </div>
             <br />
             <center>
