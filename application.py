@@ -30,15 +30,20 @@ cur=conn.cursor()
 
 
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = b'\xcc\x1e4\xc5\x8e\x80\xb5\xd9\xedd\xbe-\xd7\xf9\x8e\xd0\xccSG\xfe;\xa3Bh' # 加密用金鑰
+application = Flask(__name__)
+application.config['SECRET_KEY'] = b'\xcc\x1e4\xc5\x8e\x80\xb5\xd9\xedd\xbe-\xd7\xf9\x8e\xd0\xccSG\xfe;\xa3Bh' # 加密用金鑰
 # app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=31)
 
-@app.route("/login", methods = ['GET', 'POST'])
+@application.route("/", methods = ['GET', 'POST'])
+def home():
+    return render_template('login.html')
+
+
+@application.route("/login", methods = ['GET', 'POST'])
 def login():
     return render_template('login.html')
 
-@app.route("/login_u", methods = ['POST'])
+@application.route("/login_u", methods = ['POST'])
 def login_u():
     account = request.values.get('mid')
     password = request.values.get('password')
@@ -63,11 +68,11 @@ def login_u():
         flash('login error!')
         return redirect(url_for('login'))
 
-@app.route("/add", methods = ['GET', 'POST'])
+@application.route("/add", methods = ['GET', 'POST'])
 def add():
     return render_template('add_machine.html')
 
-@app.route("/detail/<machine_id>", methods = ['GET', 'POST'])
+@application.route("/detail/<machine_id>", methods = ['GET', 'POST'])
 def detail(machine_id):
     sql = "SELECT * FROM `machine` where machine_id = %s"
     
@@ -83,7 +88,7 @@ def detail(machine_id):
 
     return render_template('detail_machine.html', data=data, username=session.get('name'))
 
-@app.route("/edit/<machine_id>", methods = ['GET', 'POST'])
+@application.route("/edit/<machine_id>", methods = ['GET', 'POST'])
 def edit(machine_id):
     sql = "SELECT * FROM `machine` where machine_id = %s"
     
@@ -99,7 +104,7 @@ def edit(machine_id):
 
     return render_template('edit_machine.html', data=data)
 
-@app.route("/edit_submit", methods = ['GET', 'POST'])
+@application.route("/edit_submit", methods = ['GET', 'POST'])
 def edit_submit():
     type = request.values.get('machine_type')
     machine_id = request.values.get('machine_id')
@@ -111,7 +116,7 @@ def edit_submit():
 
     return redirect(url_for('machine'))
 
-@app.route("/info", methods = ['GET', 'POST'])
+@application.route("/info", methods = ['GET', 'POST'])
 def info():
     """
     mid(員工編號)
@@ -136,7 +141,7 @@ def info():
 
     return render_template('info.html', data=data)
 
-@app.route("/update_info", methods = ['GET', 'POST'])
+@application.route("/update_info", methods = ['GET', 'POST'])
 def update_info():
     name = request.values.get('name')
     password = request.values.get('password')
@@ -150,7 +155,7 @@ def update_info():
 
     return render_template('info.html')
 
-@app.route("/machine", methods = ['GET', 'POST'])
+@application.route("/machine", methods = ['GET', 'POST'])
 def machine():
     """
     machine_id（機台編號）
@@ -177,11 +182,11 @@ def machine():
 
     return render_template('machine.html', data=data, username=session.get('name'))
 
-@app.route("/main", methods = ['GET', 'POST'])
+@application.route("/main", methods = ['GET', 'POST'])
 def main():
     return render_template('mainpage.html')
 
-@app.route("/repair", methods = ['GET', 'POST'])
+@application.route("/repair", methods = ['GET', 'POST'])
 def repair():
     """
     rid
@@ -208,7 +213,7 @@ def repair():
 
     return render_template('repairpage.html', data=data)
 
-@app.route("/update_machine/<machine_id>", methods = ['GET', 'POST'])
+@application.route("/update_machine/<machine_id>", methods = ['GET', 'POST'])
 def update_machine(machine_id):
     """
     rid
@@ -222,7 +227,7 @@ def update_machine(machine_id):
 
     return redirect(url_for('machine'))
 
-@app.route("/add_machine", methods = ['GET', 'POST'])
+@application.route("/add_machine", methods = ['GET', 'POST'])
 def add_machine():
     """
     machine_id（機台編號）
@@ -241,7 +246,7 @@ def add_machine():
 
     return redirect(url_for('machine'))
 
-@app.route("/delete/<machine_id>", methods = ['GET', 'POST'])
+@application.route("/delete/<machine_id>", methods = ['GET', 'POST'])
 def delete(machine_id):
     sql = "DELETE FROM `machine` WHERE `machine_id` = %s"
     cur.execute(sql,(machine_id))
@@ -251,4 +256,4 @@ def delete(machine_id):
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port='4444', debug = True)
+    application.run( debug = True)
