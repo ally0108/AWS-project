@@ -88,6 +88,18 @@ def edit(machine_id):
 
     return render_template('edit_machine.html', data=data)
 
+@app.route("/edit_submit", methods = ['GET', 'POST'])
+def edit_submit():
+    type = request.values.get('machine_type')
+    machine_id = request.values.get('machine_id')
+    sql = "UPDATE `machine` SET `type` = %s where machine_id = %s"
+    
+    cur.execute(sql,(type,machine_id))
+    conn.commit()
+    result = cur.fetchone()
+
+    return redirect(url_for('machine'))
+
 @app.route("/info", methods = ['GET', 'POST'])
 def info():
     """
@@ -215,6 +227,14 @@ def add_machine():
     cur.execute(sql,(machine_id, type, status))
     conn.commit()
     # result = cur.fetchone()
+
+    return redirect(url_for('machine'))
+
+@app.route("/delete/<machine_id>", methods = ['GET', 'POST'])
+def delete(machine_id):
+    sql = "DELETE FROM `machine` WHERE `machine_id` = %s"
+    cur.execute(sql,(machine_id))
+    conn.commit()
 
     return redirect(url_for('machine'))
 

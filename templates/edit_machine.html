@@ -75,7 +75,8 @@
       <!-- banner section start -->
       <div class="banner_section layout_padding">
         <div class="mach-box banner_section layout_padding">
-          <form action="" method="">
+          <form action="/edit_submit" method="POST">
+            <input type="hidden" value="{{data.machine_id}}" name="machine_id">
             <div class="user-box" name="machine_id">
               <!-- <p>Machine ID: </p> -->
               <!-- machineIdElement 存在 sessionStorage 了-->
@@ -88,7 +89,7 @@
             <br />
             <center>
               <!-- 杜: submit 後資料庫要更改相對應 machine_id 的 machine_type-->
-              <a href="machine.html" type="submit" class="button editButton">
+              <button type="submit" class="button editButton">
                 SUBMIT
               </a>
             </center>
