@@ -7,10 +7,21 @@ import smtplib
 from email.message import EmailMessage
 import sys
 
+"""
 conn = pymysql.connect(
         host= '127.0.0.1', 
         port = 3306,
         user = 'root', 
+        password = '01234567',
+        db = 'sys'
+    )
+"""
+
+
+conn = pymysql.connect(
+        host= 'awseb-e-32j973mnvh-stack-awsebrdsdatabase-jrmfhy9qlvny.cofit1itheku.us-east-1.rds.amazonaws.com', 
+        port = 3306,
+        user = 'admin', 
         password = '01234567',
         db = 'sys'
     )
@@ -29,7 +40,7 @@ def login():
 
 @app.route("/login_u", methods = ['POST'])
 def login_u():
-    account = request.values.get('account')
+    account = request.values.get('mid')
     password = request.values.get('password')
 
     sql = "SELECT mid, password, name FROM `member` WHERE mid=(%s)"

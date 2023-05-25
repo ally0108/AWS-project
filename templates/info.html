@@ -19,9 +19,9 @@
     <!-- Navigation -->
     <nav>
       <ul>
-        <li><a href="mainpage.html">Home</a></li>
-        <li><a href="info.html">Info</a></li>
-        <li><a href="login.html">Log out</a></li>
+        <li><a href="/main">Home</a></li>
+        <li><a href="/info">Info</a></li>
+        <li><a href="/login">Log out</a></li>
       </ul>
     </nav>
     <!-- for forntend
@@ -49,7 +49,7 @@
               <label for="text">name</label>
             </div>
             <div class="user-box">
-              <input type="password" name="password"/>
+              <input type="password" name="password" value="{{data.password}}"/>
               <label for="types">password</label>
             </div>
             <div class="user-box">
@@ -58,10 +58,10 @@
             </div>
             <br />
             <center>
-              <a href="mainpage.html" class="button editButton">
+              <a href="/main" class="button editButton">
                 cancel
               </a>
-              <a href="mainpage.html" type="submit" class="button editButton" value="Save" >
+              <a href="/main" type="submit" class="button editButton" value="Save" >
                 save
               </a>
             </center>
