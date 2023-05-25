@@ -215,7 +215,7 @@ nav ul li a {
   width: 80px;
   height: 30px;
   margin-right: 20px;
-  padding: 10px 22px;
+  /* padding: 10px 22px; */
   background-color: #e2b842;
   transition-duration: 0.2s;
   border: none;

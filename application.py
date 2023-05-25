@@ -159,7 +159,7 @@ def update_info():
     cur.execute(sql,(name, password, email, mid))
     conn.commit()
 
-    return render_template('info.html')
+    return redirect(url_for('info'))
 
 @application.route("/machine", methods = ['GET', 'POST'])
 def machine():
