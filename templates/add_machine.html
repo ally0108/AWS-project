@@ -6,16 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
-    <title>Machine Detail</title>
+    <title>Add Machine</title>
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/style-detail.css" />
-    <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-add.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}" />
   </head>
   <body>
-    <!-- header section start -->
     <div class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -34,14 +33,14 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item">
-                <a class="nav-link" href="mainpage.html">HOME</a>
+                <a class="nav-link" href="/main">HOME</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="info.html">INFO</a>
+                <a class="nav-link" href="/info">INFO</a>
               </li>
               <!-- {% if username %} -->
               <li class="nav-item">
-                <a class="nav-link" href="login.html" onclick="logout()"
+                <a class="nav-link" href="/login" onclick="logout()"
                   >LOGOUT</a
                 >
               </li>
@@ -74,30 +73,24 @@
 
       <div class="banner_section layout_padding">
         <div class="mach-box banner_section layout_padding">
-          <!-- {% for k in data.items() %} -->
-          <div class="user-box">
-            <p>Machine ID: {{k.machine_id}}</p>
-          </div>
-          <div class="user-box">
-            <p>Machine Type: {{k.type}}</p>
-          </div>
-          <div class="user-box">
-            <p>Status: {{k.status}}</p>
-          </div>
-          <div class="user-box">
-            <p>
-              Last Repair Time: {{k.repair_time}} <br />
-              <!-- (希望呈現的樣式: 2023/05/08 10:51) -->
-            </p>
-          </div>
-          <!-- {% endfor %} -->
-          <center>
-            <div class="btnContainer">
-              <a href="edit_machine.html" class="button editButton"> EDIT </a>
-              <!-- 杜: 按下 delete 後刪除該 machine -->
-              <a href="machine.html" class="button deleteButton"> DELETE </a>
+          <form action="" method="post">
+            <div class="user-box">
+              <input type="text" name="machine_id" required />
+              <label>Machine ID</label>
             </div>
-          </center>
+            <div class="user-box">
+              <input type="text" name="machine_type" required />
+              <label>Machine Type</label>
+            </div>
+            <div class="user-box">
+              <input type="text" name="machine_status" required />
+              <label>Machine Status</label>
+            </div>
+            <center>
+              <!-- 杜: submit 後資料庫要新增一個新的machine -->
+              <a href="/machine" type="submit" class="editButton"> ADD </a>
+            </center>
+          </form>
         </div>
       </div>
     </div>
@@ -111,5 +104,6 @@
         sessionStorage.clear();
       }
     </script>
+    <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
   </body>
 </html>

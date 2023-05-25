@@ -10,9 +10,9 @@
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}" />
   </head>
   <body>
     <div class="header_section">
@@ -33,14 +33,14 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item">
-                <a class="nav-link" href="mainpage.html">HOME</a>
+                <a class="nav-link" href="/main">HOME</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="info.html">INFO</a>
+                <a class="nav-link" href="/info">INFO</a>
               </li>
-              <!-- {% if username %} -->
+              <!-- {% if name %} -->
               <li class="nav-item">
-                <a class="nav-link" href="login.html" onclick="logout()"
+                <a class="nav-link" href="/login" onclick="logout()"
                   >LOGOUT</a
                 >
               </li>
@@ -51,7 +51,7 @@
               {% endif %} -->
             </ul>
             <form class="form-inline my-2 my-lg-0">
-              <!-- {% if username %} -->
+              <!-- {% if name %} -->
               <button
                 class="btn btn-outline-success my-2 my-sm-0"
                 type="submit"
@@ -76,7 +76,7 @@
           <div class="add_mach">
             <button
               class="add-btn"
-              onclick="location.href = 'add_machine.html';"
+              onclick="location.href = '/add';"
             >
               Add Machine
             </button>
@@ -84,7 +84,7 @@
           <div class="banner_section_2">
             <div class="row">
               <!-- 杜: 俞萱只要改這裡就可以了 Start ! -->
-              <!-- {% for k in data.items() %} -->
+               {% for k in data %}
               <div
                 class="{% if k.status == 'good' %}card1{% else %}card2{% endif %}"
                 onclick="redirectToDetailPage(this);"
@@ -105,71 +105,8 @@
                 </div>
                 {% endif %}
               </div>
-              <!-- {% endfor %} -->
+              {% endfor %}
               <!-- 杜: 俞萱只要改這裡就可以了 End ! -->
-
-              <!-- 下面只是原本樣子的範例 -->
-              <!-- {% for k in data.items() %} -->
-              <div
-                class="card1"
-                onclick="redirectToDetailPage(this);"
-                data-machine-id="{{k.machine_id}}"
-              >
-                <p>Machine ID: {{k.machine_id}}</p>
-                <p>Status: {{k.status}}</p>
-                <p class="small">Last Repair Time: <br />{{k.repair_time}}</p>
-                <p class="small">Machine Type: {{k.type}}</p>
-                <div class="go-corner" href="#">
-                  <div class="go-arrow">○</div>
-                </div>
-              </div>
-              <!-- {% endfor %} -->
-              <!-- {% for k in data.items() %} -->
-              <div
-                class="card1"
-                onclick="redirectToDetailPage(this);"
-                data-machine-id="{{k.machine_id}}"
-              >
-                <p>Machine ID: 80E</p>
-                <p>Status: 良好</p>
-                <p class="small">Last Repair Time: <br />2023/05/10 13:41</p>
-                <p class="small">Machine Type: A</p>
-                <div class="go-corner" href="#">
-                  <div class="go-arrow">○</div>
-                </div>
-              </div>
-              <!-- {% endfor %} -->
-              <!-- {% for k in data.items() %} -->
-              <div
-                class="card2"
-                onclick="redirectToDetailPage(this);"
-                data-machine-id="{{k.machine_id}}"
-              >
-                <p>Machine ID: {{k.machine_id}}</p>
-                <p>Status: {{k.status}}</p>
-                <p class="small">Last Repair Time: <br />{{k.repair_time}}</p>
-                <p class="small">Machine Type: {{k.type}}</p>
-                <button class="com-btn repairBtn">Repair Complete</button>
-                <div class="go-corner2" href="#">
-                  <div class="go-arrow">×</div>
-                </div>
-              </div>
-              <!-- {% endfor %} -->
-              <!-- {% for k in data.items() %} -->
-              <div
-                class="card2"
-                onclick="location.href = 'detail_machine.html';"
-              >
-                <p>Machine ID: 21A</p>
-                <p>Status: 待維修</p>
-                <p class="small">Last Repair Time: <br />2023/05/08 10:51</p>
-                <p class="small">Machine Type: C</p>
-                <button class="com-btn repairBtn">Repair Complete</button>
-                <div class="go-corner2" href="#">
-                  <div class="go-arrow">×</div>
-                </div>
-              </div>
-              <!-- {% endfor %} -->
             </div>
           </div>
         </div>
@@ -208,7 +145,7 @@
         // 存 machineId ，之後在 detail_machine.html 會用到
         sessionStorage.setItem("selectedMachineId", machineId);
 
-        location.href = "detail_machine.html";
+        location.href = "/detail";
       }
 
       // 修改 machine status
@@ -219,7 +156,7 @@
 
           // 杜: 更新資料庫中相對應 machine_id 的 machine_status 為 good(良好)
 
-          location.href = "machine.html";
+          location.href = "/machine";
         });
       }
 

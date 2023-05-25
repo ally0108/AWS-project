@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
-    <title>Edit Machine</title>
+    <title>Machine Detail</title>
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/style-edit.css" />
-    <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-detail.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}" />
   </head>
   <body>
     <!-- header section start -->
@@ -34,14 +34,14 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item">
-                <a class="nav-link" href="mainpage.html">HOME</a>
+                <a class="nav-link" href="/main">HOME</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="info.html">INFO</a>
+                <a class="nav-link" href="/info">INFO</a>
               </li>
               <!-- {% if username %} -->
               <li class="nav-item">
-                <a class="nav-link" href="login.html" onclick="logout()"
+                <a class="nav-link" href="/login" onclick="logout()"
                   >LOGOUT</a
                 >
               </li>
@@ -71,37 +71,37 @@
           </div>
         </nav>
       </div>
-      <!-- header section end -->
-      <!-- banner section start -->
+
       <div class="banner_section layout_padding">
         <div class="mach-box banner_section layout_padding">
-          <form action="" method="">
-            <div class="user-box" name="machine_id">
-              <!-- <p>Machine ID: {{k.machine_id}}</p> -->
-              <!-- machineIdElement 存在 sessionStorage 了-->
-              <p id="machineIdElement"></p>
+          <!-- {% for k in data.items() %} -->
+          <div class="user-box">
+            <p>Machine ID: {{k.machine_id}}</p>
+          </div>
+          <div class="user-box">
+            <p>Machine Type: {{k.type}}</p>
+          </div>
+          <div class="user-box">
+            <p>Status: {{k.status}}</p>
+          </div>
+          <div class="user-box">
+            <p>
+              Last Repair Time: {{k.repair_time}} <br />
+              <!-- (希望呈現的樣式: 2023/05/08 10:51) -->
+            </p>
+          </div>
+          <!-- {% endfor %} -->
+          <center>
+            <div class="btnContainer">
+              <a href="/edit" class="button editButton"> EDIT </a>
+              <!-- 杜: 按下 delete 後刪除該 machine -->
+              <a href="/machin" class="button deleteButton"> DELETE </a>
             </div>
-            <div class="user-box">
-              <input type="type" name="machine_type" required />
-              <label for="types">Machine Type</label>
-            </div>
-            <br />
-            <center>
-              <!-- 杜: submit 後資料庫要更改相對應 machine_id 的 machine_type-->
-              <a href="machine.html" type="submit" class="button editButton">
-                SUBMIT
-              </a>
-            </center>
-          </form>
+          </center>
         </div>
       </div>
-      <!-- banner section end -->
     </div>
     <script>
-      var machineId = sessionStorage.getItem("selectedMachineId");
-      var machineIdElement = document.getElementById("machineIdElement");
-      machineIdElement.textContent = "Machine ID: " + machineId;
-
       // for navbar username
       var username = sessionStorage.getItem("username");
       var usernameElement = document.getElementById("username");
@@ -111,6 +111,5 @@
         sessionStorage.clear();
       }
     </script>
-    <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
   </body>
 </html>

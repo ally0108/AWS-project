@@ -6,15 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
-    <title>Add Machine</title>
+    <title>Edit Machine</title>
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/style-add.css" />
-    <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}" />
   </head>
   <body>
+    <!-- header section start -->
     <div class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -70,31 +71,37 @@
           </div>
         </nav>
       </div>
-
+      <!-- header section end -->
+      <!-- banner section start -->
       <div class="banner_section layout_padding">
         <div class="mach-box banner_section layout_padding">
-          <form action="" method="post">
-            <div class="user-box">
-              <input type="text" name="machine_id" required />
-              <label>Machine ID</label>
+          <form action="" method="">
+            <div class="user-box" name="machine_id">
+              <!-- <p>Machine ID: {{k.machine_id}}</p> -->
+              <!-- machineIdElement 存在 sessionStorage 了-->
+              <p id="machineIdElement"></p>
             </div>
             <div class="user-box">
-              <input type="text" name="machine_type" required />
-              <label>Machine Type</label>
+              <input type="type" name="machine_type" required />
+              <label for="types">Machine Type</label>
             </div>
-            <div class="user-box">
-              <input type="text" name="machine_status" required />
-              <label>Machine Status</label>
-            </div>
+            <br />
             <center>
-              <!-- 杜: submit 後資料庫要新增一個新的machine -->
-              <a href="machine.html" type="submit" class="editButton"> ADD </a>
+              <!-- 杜: submit 後資料庫要更改相對應 machine_id 的 machine_type-->
+              <a href="machine.html" type="submit" class="button editButton">
+                SUBMIT
+              </a>
             </center>
           </form>
         </div>
       </div>
+      <!-- banner section end -->
     </div>
     <script>
+      var machineId = sessionStorage.getItem("selectedMachineId");
+      var machineIdElement = document.getElementById("machineIdElement");
+      machineIdElement.textContent = "Machine ID: " + machineId;
+
       // for navbar username
       var username = sessionStorage.getItem("username");
       var usernameElement = document.getElementById("username");

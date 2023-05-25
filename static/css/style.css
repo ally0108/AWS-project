@@ -480,3 +480,277 @@ nav ul li a {
   color: #fefefe;
   margin-left: 0px;
 }
+
+
+/* nav bar */
+* {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+html {
+  width: 100%;
+}
+
+nav {
+  height: 80px;
+  width: 100%;
+}
+
+nav ul {
+  gap: 30px;
+  float: right;
+  margin-right: 20px;
+}
+
+nav ul li {
+  display: inline-block;
+  line-height: 80px;
+  margin: 0 5px;
+}
+
+nav ul li a {
+  color: white;
+  font-size: 17px;
+  padding: 10px 13px;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+
+a.active,
+a:hover {
+  background: #e2b842;
+  transition: 0.5s;
+}
+
+/* loginpage && form */
+*,
+*:before,
+*:after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: #080710;
+}
+.background {
+  width: 430px;
+  height: 520px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+}
+.background .shape {
+  height: 200px;
+  width: 200px;
+  position: absolute;
+  border-radius: 50%;
+}
+.shape:first-child {
+  background: linear-gradient(#1845ad, #23a2f6);
+  left: -80px;
+  top: -80px;
+}
+.shape:last-child {
+  background: linear-gradient(to right, #ff512f, #f09819);
+  right: -30px;
+  bottom: -80px;
+}
+form {
+  height: 520px;
+  width: 400px;
+  background-color: rgba(255, 255, 255, 0.13);
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+  padding: 50px 35px;
+}
+form * {
+  font-family: "Poppins", sans-serif;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  outline: none;
+  border: none;
+}
+form h3 {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 42px;
+  text-align: center;
+}
+
+label {
+  display: block;
+  margin-top: 30px;
+  font-size: 16px;
+  font-weight: 500;
+}
+input {
+  display: block;
+  height: 50px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.07);
+  border-radius: 3px;
+  padding: 0 10px;
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 300;
+}
+::placeholder {
+  color: #e5e5e5;
+}
+
+#submitbtn {
+  margin-top: 50px;
+  width: 100%;
+  background-color: #ffffff;
+  color: #080710;
+  padding: 15px 0;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#submitbtn2 {
+  margin-top: 40px;
+  width: 100%;
+  background-color: #f09819;
+  color: #080710;
+  padding: 10px 0;
+  font-size: 10px;
+  font-weight: 400;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* repair page */
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #080710;
+  font-family: "Open Sans", sans-serif;
+}
+table {
+  background: #012b39;
+  border-radius: 0.25em;
+  border-collapse: collapse;
+  margin: 1em;
+  margin-left: auto;
+  margin-right: auto;
+}
+th {
+  border-bottom: 1px solid #364043;
+  color: #e2b842;
+  font-size: 0.85em;
+  font-weight: 600;
+  padding: 0.5em 1em;
+  text-align: center;
+}
+td {
+  color: #fff;
+  font-weight: 400;
+  padding: 0.65em 1em;
+  text-align: center;
+}
+.disabled td {
+  color: #4f5f64;
+}
+tbody tr {
+  transition: background 0.25s ease;
+}
+tbody tr:hover {
+  background: #014055;
+}
+h2 {
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+
+/* 主頁面(mainpage) */
+body {
+  font-family: "Nunito", sans-serif;
+  background-color: #080710;
+}
+.me {
+  color: white;
+}
+
+.container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  .check {
+    display: none;
+  }
+  .btn {
+    text-transform: uppercase;
+    color: #fff;
+    border: 2px solid #e2b842;
+    display: inline-block;
+    padding: 15px;
+    padding-right: 50px;
+    padding-left: 50px;
+    border-radius: 3px;
+    cursor: pointer;
+    overflow: hidden;
+    box-sizing: border-box;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    .mo {
+      position: relative;
+      overflow: hidden;
+      bottom: -150px;
+      width: 0px;
+      height: 0px;
+      text-align: center;
+      display: inline-block;
+      opacity: 0;
+      color: #272727;
+    }
+    &:before {
+      width: 0%;
+      position: absolute;
+      left: 0;
+      bottom: 3px;
+      height: 5px;
+      background-color: #e2b842;
+      content: "";
+    }
+    &:after {
+      width: 100%;
+      height: 0%;
+      position: absolute;
+      bottom: 3px;
+      left: 0;
+      background-color: #e2b842;
+      content: "Download complete";
+      overflow: hidden;
+      text-align: center;
+      line-height: 180px;
+    }
+
+    &:hover {
+      background-color: #e2b842;
+      color: #060e33;
+    }
+  }
+}
