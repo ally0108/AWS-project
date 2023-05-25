@@ -5,16 +5,19 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
     />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
-    <title>主頁面</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style-mainpage.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style-nav.css') }}" />
+    <title>main page</title>
     <nav>
       <ul>
-        <li><a href="/main">Home</a></li>
-        <li><a href="/info">Info</a></li>
-        <li><a href="/login">Log out</a></li>
+        <li><a href="mainpage.html">Home</a></li>
+        <li><a href="info.html">Info</a></li>
+        <li><a href="login.html">Log out</a></li>
       </ul>
     </nav>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <!-- for forntend
+    <link rel="stylesheet" href="../static/css/style-mainpage.css">
+    <link rel="stylesheet" href="../static/css/style-nav.css"> -->
   </head>
 
   <body>
@@ -23,7 +26,7 @@
         <input class="check" type="checkbox" />
         <div class="btn">
           <span class="me">
-            <a class="me" href="/machine">MACHINE STATUS</a>
+            <a class="me" href="machine.html">MACHINE STATUS</a>
           </span>
         </div>
       </label>
@@ -31,7 +34,7 @@
         <input class="check" type="checkbox" />
         <div class="btn">
           <span class="me"
-            ><a class="me" href="/repair">REPAIR RECORDS</a>
+            ><a class="me" href="repairpage.html">REPAIR RECORDS</a>
           </span>
         </div>
       </label>

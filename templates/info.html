@@ -1,41 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>修改個人資料</title>
+    <title>edit profile</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-edit.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style-nav.css') }}" />
+
     <!-- Navigation -->
     <nav>
       <ul>
-        <li><a href="/main">Home</a></li>
-        <li><a href="/info">Info</a></li>
-        <li><a href="/login">Log out</a></li>
+        <li><a href="mainpage.html">Home</a></li>
+        <li><a href="info.html">Info</a></li>
+        <li><a href="login.html">Log out</a></li>
       </ul>
     </nav>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <!-- for forntend
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/style-edit.css">
+    <link rel="stylesheet" href="../static/css/responsive.css">
+    <link rel="stylesheet" href="../static/css/style-nav.css"> -->
+   
   </head>
 
   <body>
-    <div class="background">
-      <!--    <form action="/signup_act"  method="post" class="form-style-9"> -->
-      <form>
-        <ul>
-          <h4>Update Info</h4>
-          <li>
-            <label>Password</label>
-            <input type="password" name="password" placeholder="new password" required/>
-          </li>
-          <li>
-            <label>Name</label>
-            <input type="password" name="name" placeholder="new name" value="{{data.name}}"/>
-          </li>
-          <li>
-            <label>Email</label>
-            <input type="text" name="email" placeholder="new email"  value="{{data.email}}"/>
-          </li>
-          <div>
-            <input type="submit" class="btn" value="Save" id="submitbtn2" />
-          </div>
-        </ul>
-      </form>
-    </div>
+     <div class="header_section">
+      <div class="container-fluid">       
+      </div>
+      <div class="banner_section layout_padding">
+        <div class="mach-box banner_section layout_padding">
+          <form action="" method="">
+           
+            <div class="user-box" name="m_id">
+              <p id="mid">update your Info</p>
+            </div>
+
+            <div class="user-box">
+              <input type="text" value="{{data.name}}" name="name" />
+              <label for="text">name</label>
+            </div>
+            <div class="user-box">
+              <input type="password" name="password"/>
+              <label for="types">password</label>
+            </div>
+            <div class="user-box">
+              <input type="text" name="email" value="{{data.email}}"/>
+              <label for="types">email</label>
+            </div>
+            <br />
+            <center>
+              <a href="mainpage.html" class="button editButton">
+                cancel
+              </a>
+              <a href="mainpage.html" type="submit" class="button editButton" value="Save" >
+                save
+              </a>
+            </center>
+          </form>
+        </div>
+      </div>
   </body>
 </html>

@@ -13,63 +13,26 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-detail.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style-nav.css') }}" />
+   
+      <ul>
+        <li><a href="mainpage.html">Home</a></li>
+        <li><a href="info.html">Info</a></li>
+        <li><a href="login.html">Log out</a></li>
+      </ul>
+    </nav>
+    <!-- for forntend
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/style-detail.css">
+    <link rel="stylesheet" href="../static/css/responsive.css">
+    <nav>
+    <link rel="stylesheet" href="../static/css/style-nav.css"> -->
   </head>
   <body>
     <!-- header section start -->
     <div class="header_section">
       <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <div class="logo">Wonderful Machine</div>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="/main">HOME</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/info">INFO</a>
-              </li>
-              <!-- {% if username %} -->
-              <li class="nav-item">
-                <a class="nav-link" href="/login" onclick="logout()"
-                  >LOGOUT</a
-                >
-              </li>
-              <!-- {% else %}
-              <li class="nav-item">
-                <a class="nav-link" href="login.html">SIGNUP</a>
-              </li>
-              {% endif %} -->
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-              <!-- {% if username %} -->
-              <button
-                class="btn btn-outline-success my-2 my-sm-0"
-                type="submit"
-              >
-                HI, <span id="username"></span> !
-              </button>
-              <!-- {% else %}
-              <button
-                class="btn btn-outline-success my-2 my-sm-0"
-                type="submit"
-              >
-                LOGIN
-              </button>
-              {% endif %} -->
-            </form>
-          </div>
-        </nav>
+        
       </div>
 
       <div class="banner_section layout_padding">
