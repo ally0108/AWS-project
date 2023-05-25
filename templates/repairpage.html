@@ -31,7 +31,7 @@
         </thead>
 
         <tbody>
-          <tr>
+          <!-- <tr>
             <td>2023/05/20</td>
             <td>001</td>
             <td>100</td>
@@ -43,19 +43,19 @@
                 <td>101</td>
                 <td>
                   Zoe
-
-                  {% for k in data %}
-                  <tr>
-                    <td>{{k.datetime}}</td>
-                    <td>{{k.rid}}</td>
-                    <td>{{k.machine_id}}</td>
-                    <td>{{k.name}}</td>
-                  </tr>
-                  {% endfor %}
                 </td>
               </tr>
             </td>
-          </tr>
+          </tr> -->
+          {{data}}
+          {% for k in data %}
+            <tr>
+              <td>{{k.datetime}}</td>
+              <td>{{k.rid}}</td>
+              <td>{{k.machine_id}}</td>
+              <td>{{k.name}}</td>
+            </tr>
+          {% endfor %}
         </tbody>
       </table>
     </div>

@@ -6,6 +6,8 @@ import os
 import smtplib
 from email.message import EmailMessage
 import sys
+from email.mime.multipart import MIMEMultipart
+from email.message import EmailMessage
 
 """
 conn = pymysql.connect(
@@ -85,6 +87,7 @@ def detail(machine_id):
     data['type'] = result[1]
     data['status'] = result[2]
     data['repair_time'] = result[3]
+    data['period'] = result[4]
 
     return render_template('detail_machine.html', data=data, username=session.get('name'))
 
@@ -108,11 +111,13 @@ def edit(machine_id):
 def edit_submit():
     type = request.values.get('machine_type')
     machine_id = request.values.get('machine_id')
-    sql = "UPDATE `machine` SET `type` = %s where machine_id = %s"
+    status = request.values.get('status')
+
+    sql = "UPDATE `machine` SET `type` = %s, `status` = %s where machine_id = %s"
     
-    cur.execute(sql,(type,machine_id))
+    cur.execute(sql,(type, status, machine_id))
     conn.commit()
-    result = cur.fetchone()
+    send_email(machine_id)
 
     return redirect(url_for('machine'))
 
@@ -238,9 +243,11 @@ def add_machine():
     machine_id = request.values.get('machine_id')
     type = request.values.get('machine_type')
     status = request.values.get('machine_status')
+    period = request.values.get('machine_period')
 
-    sql = "INSERT INTO `machine` (`machine_id`, `type`, `status`) VALUES (%s, %s, %s)"
-    cur.execute(sql,(machine_id, type, status))
+
+    sql = "INSERT INTO `machine` (`machine_id`, `type`, `status`, `period`) VALUES (%s, %s, %s, %s)"
+    cur.execute(sql,(machine_id, type, status, period))
     conn.commit()
     # result = cur.fetchone()
 
@@ -253,6 +260,37 @@ def delete(machine_id):
     conn.commit()
 
     return redirect(url_for('machine'))
+
+
+def send_email(machine_id):
+    send_user = 'clouddemodb@gmail.com'
+    password = 'hjbxozbnvtbgpfbo'
+    mid = session.get('mid')
+
+    sql = "SELECT `email` FROM `member` WHERE `machine_id` = %s"
+    cur.execute(sql,(machine_id))
+    conn.commit()
+    result = cur.fetchone()
+    user = result[0]
+
+
+
+    msg = EmailMessage()
+    msg['Subject'] = 'Machine Update Notification'
+    msg['From'] = send_user
+    msg['To'] = user
+    msg.set_content('您的機台資訊已被更新')
+
+    try:
+        server = smtplib.SMTP_SSL('smtp.gmail.com', 465) # 設定SMTP伺服器
+        server.ehlo() # 驗證SMTP伺服器
+        server.login(send_user, password)
+        server.send_message(msg)
+        server.close()
+
+        print('Email sent!')
+    except Exception as exception:
+        print("Error: %s!\n\n" % exception)
 
 
 if __name__ == '__main__':

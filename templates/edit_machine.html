@@ -55,10 +55,10 @@
             <br>
             <br>
        
-            <select class="minimal">
-              <option value="none" selected disabled hidden defaultValue="{{data.type}}">
+            <select class="minimal" name="machine_type">
+              <option value="{{data.type}}" selected hidden>
                 {{data.type}}
-            </option>
+              </option>
               <option value="type A">type A</option>
               <option value="type B">type B</option>
               <option value="type C">type C</option>
@@ -67,12 +67,12 @@
 
   
           </div>
-          <div class="user-box">
+          <div class="user-box" >
             <label for="types">Status</label>
             <br>
             <br>
-            <select class="minimal">
-              <option value="none" selected disabled hidden defaultValue="{{data.status}}">
+            <select class="minimal" name="status">
+              <option value="{{data.status}}" selected hidden>
                 {{data.status}}
             </option>
               <option value="good">good</option>
