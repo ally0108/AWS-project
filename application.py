@@ -8,6 +8,7 @@ from email.message import EmailMessage
 import sys
 from email.mime.multipart import MIMEMultipart
 from email.message import EmailMessage
+import datetime
 
 """
 conn = pymysql.connect(
@@ -226,9 +227,18 @@ def update_machine(machine_id):
     machine_id
     datetime
     """
-    sql = "UPDATE `machine` SET `status` = 'good' where machine_id = (%s)"
-    cur.execute(sql,(machine_id))
+    today = datetime.date.today()
+    time = datetime.datetime.today()
+
+    sql = "UPDATE `machine` SET `status` = 'good', `repair_time`= %s where machine_id = (%s)"
+    cur.execute(sql,(time,machine_id))
     conn.commit()
+
+    mid = session.get('mid')
+    sql = "INSERT INTO `repair` (mid, machine_id, datetime) VALUES (%s, %s, %s)"
+    cur.execute(sql,(mid, machine_id, today))
+    conn.commit()
+
 
     return redirect(url_for('machine'))
 
