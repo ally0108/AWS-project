@@ -1,81 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
-    <title>Edit Machine</title>
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-edit.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style-nav.css') }}" />
-  
 
-    <nav>
-      <ul>
-        <li><a href="/main">Home</a></li>
-        <li><a href="/info">Info</a></li>
-        <li><a href="/login">Log out</a></li>
-      </ul>
-    </nav>
- <!-- for forntend
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+  <title>Edit Machine</title>
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-edit.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style-nav.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style-select.css') }}" />
+
+
+  <nav>
+    <ul>
+      <li><a href="/main">Home</a></li>
+      <li><a href="/info">Info</a></li>
+      <li><a href="/login">Log out</a></li>
+    </ul>
+  </nav>
+  <!-- for forntend
     <link rel="stylesheet" href="../static/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/css/style-edit.css">
     <link rel="stylesheet" href="../static/css/responsive.css">
     <link rel="stylesheet" href="../static/css/style-nav.css"> -->
-  </head>
-  <body>
-    <!-- header section start -->
-    <div class="header_section">
-      <div class="container-fluid">
-        
-      </div>
-      <!-- header section end -->
-      <!-- banner section start -->
-      <div class="banner_section layout_padding">
-        <div class="mach-box banner_section layout_padding">
-          <form action="/edit_submit" method="POST">
-            <input type="hidden" value="{{data.machine_id}}" name="machine_id">
-            <div class="user-box" name="machine_id">
-              <!-- <p>Machine ID: </p> -->
-              <!-- machineIdElement 存在 sessionStorage 了-->
-              <p id="machineIdElement">{{data.machine_id}}</p>
-            </div>
-            <div class="user-box">
-              <label for="types">Machine Type</label>
-              <input type="type" name="machine_type" required value="{{data.type}}" />
-            </div>
-            <br />
-            <center>
-              <!-- 杜: submit 後資料庫要更改相對應 machine_id 的 machine_type-->
-              <button type="submit" class="button editButton">
-                SUBMIT
-              </a>
-            </center>
-          </form>
-        </div>
-      </div>
-      <!-- banner section end -->
+ 
+</head>
+
+<body>
+  <!-- header section start -->
+  <div class="header_section">
+    <div class="container-fluid">
+
     </div>
-    <script>
-      var machineId = sessionStorage.getItem("selectedMachineId");
-      var machineIdElement = document.getElementById("machineIdElement");
-      machineIdElement.textContent = "Machine ID: " + machineId;
+    <!-- header section end -->
+    <!-- banner section start -->
+    <div class="banner_section layout_padding">
+      <div class="mach-box banner_section layout_padding">
+        <form action="/edit_submit" method="POST">
+          <input type="hidden" value="{{data.machine_id}}" name="machine_id">
+          <div class="user-box" name="machine_id">
+            <!-- <p>Machine ID: </p> -->
+            <!-- machineIdElement 存在 sessionStorage 了-->
+            <!-- <p id="machineIdElement">{{data.machine_id}}</p> -->
+          </div>
+          <div class="user-box">
+            <label for="types">Machine Type</label>
+            <br>
+            <br>
+       
+            <select class="minimal">
+              <option value="none" selected disabled hidden defaultValue="{{data.type}}">
+                {{data.type}}
+            </option>
+              <option value="type A">type A</option>
+              <option value="type B">type B</option>
+              <option value="type C">type C</option>
+            </select>
+           
 
-      // for navbar username
-      var username = sessionStorage.getItem("username");
-      var usernameElement = document.getElementById("username");
-      usernameElement.textContent = username;
+  
+          </div>
+          <div class="user-box">
+            <label for="types">Status</label>
+            <br>
+            <br>
+            <select class="minimal">
+              <option value="none" selected disabled hidden defaultValue="{{data.status}}">
+                {{data.status}}
+            </option>
+              <option value="good">good</option>
+              <option value="bad">bad</option>
+       
+            </select>
+        
+          </div>
+          <br />
+          <center>
+            <!-- 杜: submit 後資料庫要更改相對應 machine_id 的 machine_type-->
+            <button type="submit" class="button editButton">
+              SUBMIT
+              </a>
+          </center>
+        </form>
+      </div>
+    </div>
+    <!-- banner section end -->
+  </div>
+  <script>
+    var machineId = sessionStorage.getItem("selectedMachineId");
+    var machineIdElement = document.getElementById("machineIdElement");
+    machineIdElement.textContent = "Machine ID: " + machineId;
 
-      function logout() {
-        sessionStorage.clear();
-      }
-    </script>
-    <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-  </body>
+    // for navbar username
+    var username = sessionStorage.getItem("username");
+    var usernameElement = document.getElementById("username");
+    usernameElement.textContent = username;
+
+    function logout() {
+      sessionStorage.clear();
+    }
+  </script>
+  <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+</body>
+
 </html>

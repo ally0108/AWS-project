@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-add.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style-nav.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style-select.css') }}" />
 
    
     <nav>
@@ -40,14 +41,34 @@
               <label>Machine ID</label>
             </div>
             <div class="user-box">
-              <input type="text" name="machine_type" required />
+              <!-- <input type="text" name="machine_type" required /> -->
               <label>Machine Type</label>
-              
+              <br>  <br>
+              <select class="minimal">
+                <option value="type A">type A</option>
+                <option value="type B">type B</option>
+                <option value="type C">type C</option>
+              </select>
+              <br>
             </div>
             <div class="user-box">
-              <input type="text" name="machine_status" required />
+              <!-- <input type="text" name="machine_status" required /> -->
               <label>Machine Status</label>
+              <br>  <br>
+              <select class="minimal">
+               
+                <option value="good">good</option>
+                <option value="bad">bad</option>
+         
+              </select>
+              <br> 
             </div>
+            <br> 
+            <div class="user-box">
+              <input type="text" name="machine_period" required />
+              
+              <label>Maintaining Period (days)</label>
+           </div>
             <center>
               <!-- 杜: submit 後資料庫要新增一個新的machine -->
               <button type="submit" class="editButton"> ADD </a>
