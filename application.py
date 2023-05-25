@@ -118,7 +118,7 @@ def edit_submit():
     
     cur.execute(sql,(type, status, machine_id))
     conn.commit()
-    send_email(machine_id)
+    send_email(machine_id, type, status)
 
     return redirect(url_for('machine'))
 
@@ -272,7 +272,7 @@ def delete(machine_id):
     return redirect(url_for('machine'))
 
 
-def send_email(machine_id):
+def send_email(machine_id, type, status):
     send_user = 'clouddemodb@gmail.com'
     password = 'hjbxozbnvtbgpfbo'
     mid = session.get('mid')
@@ -289,7 +289,11 @@ def send_email(machine_id):
     msg['Subject'] = 'Machine Update Notification'
     msg['From'] = send_user
     msg['To'] = user
-    msg.set_content('您的機台資訊已被更新')
+    email_str = '您的機台資訊已被更新\n'
+    email_str += 'Machine ID: ' + str(machine_id) + '\n'
+    email_str += 'Machine Type: ' + type + '\n'
+    email_str += 'Status: ' + status + '\n'
+    msg.set_content(email_str)
 
     try:
         server = smtplib.SMTP_SSL('smtp.gmail.com', 465) # 設定SMTP伺服器
